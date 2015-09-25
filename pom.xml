@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.qualinsight.core</groupId>
   <artifactId>qualinsight-core-superparent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>qualinsight-core-superparent</name>
   <description>This project provides the super parent pom needed to release QualInsight projects.</description>
   <url>https://github.com/QualInsight/qualinsight-cor-superparent</url>
@@ -32,7 +32,7 @@
     <connection>scm:git:git@github.com:QualInsight/qualinsight-core-superparent.git</connection>
     <developerConnection>scm:git:git@github.com:QualInsight/qualinsight-core-superparent.git</developerConnection>
     <url>https://github.com/QualInsight/qualinsight-core-superparent.git</url>
-    <tag>HEAD</tag>
+    <tag>qualinsight-core-superparent-1.0.0</tag>
   </scm>
   <properties>
     <!-- General properties -->

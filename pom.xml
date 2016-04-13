@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.qualinsight.core</groupId>
-  <artifactId>qualinsight-core-superparent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <name>qualinsight-core-superparent</name>
-  <description>This project provides the super parent pom needed to release QualInsight projects.</description>
+  <groupId>com.qualinsight.mavencentral</groupId>
+  <artifactId>qualinsight-mavencentral-parent</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+  <name>qualinsight-mavencentral-parent</name>
+  <description>Parent pom providing required configuration to release QualInsight OpenSource projects on Maven Central.</description>
   <url>https://github.com/QualInsight/qualinsight-cor-superparent</url>
   <organization>
     <url>http://www.qualinsight.com/</url>
@@ -29,10 +29,10 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:git@github.com:QualInsight/qualinsight-core-superparent.git</connection>
-    <developerConnection>scm:git:git@github.com:QualInsight/qualinsight-core-superparent.git</developerConnection>
-    <url>https://github.com/QualInsight/qualinsight-core-superparent.git</url>
-    <tag>qualinsight-core-superparent-1.0.0</tag>
+    <connection>scm:git:git@github.com:QualInsight/qualinsight-mavencentral-parent.git</connection>
+    <developerConnection>scm:git:git@github.com:QualInsight/qualinsight-mavencentral-parent.git</developerConnection>
+    <url>https://github.com/QualInsight/qualinsight-mavencentral-parent.git</url>
+    <tag>HEAD</tag>
   </scm>
   <properties>
     <!-- General properties -->
@@ -44,6 +44,21 @@
     <plugin.version.maven-javadoc-plugin>2.9.1</plugin.version.maven-javadoc-plugin>
     <plugin.version.maven-gpg-plugin>1.5</plugin.version.maven-gpg-plugin>
     <plugin.version.maven-release-plugin>2.5</plugin.version.maven-release-plugin>
+    <plugin.version.maven-compiler-plugin>3.3</plugin.version.maven-compiler-plugin>
+    <plugin.version.maven-surefire-plugin>2.18.1</plugin.version.maven-surefire-plugin>
+    <plugin.version.maven-failsafe-plugin>2.18.1</plugin.version.maven-failsafe-plugin>
+    <plugin.version.maven-enforcer-plugin>1.4</plugin.version.maven-enforcer-plugin>
+    <plugin.version.jacoco-maven-plugin>0.7.5.201505241946</plugin.version.jacoco-maven-plugin>
+    <plugin.version.license-maven-plugin>2.11</plugin.version.license-maven-plugin>
+    <!-- Dependency versions setup -->
+    <lib.version.qualinsight-core-licenseheaders>1.0.0</lib.version.qualinsight-core-licenseheaders>
+    <!-- License properties -->
+    <license.name>QualInsight-LGPL3</license.name>
+    <license.project>${project.name}</license.project>
+    <license.period>${project.inceptionYear}</license.period>
+    <license.owner>${project.organization.name}</license.owner>
+    <license.url>${project.organization.url}</license.url>
+    <license.email />
   </properties>
   <build>
     <pluginManagement>
@@ -118,9 +133,137 @@
             <goals>deploy</goals>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${plugin.version.maven-surefire-plugin}</version>
+          <configuration>
+            <skip>true</skip>
+            <parallel>classesAndMethods</parallel>
+            <threadCount>10</threadCount>
+            <failIfNoTests>false</failIfNoTests>
+          </configuration>
+          <executions>
+            <execution>
+              <id>surefire-ut</id>
+              <phase>test</phase>
+              <goals>
+                <goal>test</goal>
+              </goals>
+              <configuration>
+                <skip>false</skip>
+                <reportsDirectory>${project.build.directory}/surefire-ut-reports</reportsDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${plugin.version.maven-failsafe-plugin}</version>
+          <executions>
+            <execution>
+              <id>failsafe-it</id>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${plugin.version.jacoco-maven-plugin}</version>
+          <executions>
+            <execution>
+              <id>jacoco-prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <configuration>
+                <dumpOnExit>true</dumpOnExit>
+                <output>file</output>
+              </configuration>
+            </execution>
+            <execution>
+              <id>jacoco-prepare-agent-integration</id>
+              <goals>
+                <goal>prepare-agent-integration</goal>
+              </goals>
+              <configuration>
+                <dumpOnExit>true</dumpOnExit>
+                <output>file</output>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${plugin.version.license-maven-plugin}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.qualinsight.core</groupId>
+              <artifactId>qualinsight-core-licenseheaders</artifactId>
+              <version>${lib.version.qualinsight-core-licenseheaders}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <header>com/qualinsight/core/licenseheaders/${license.name}.txt</header>
+            <validHeaders>
+              <validHeader>com/qualinsight/core/licenseheaders/QualInsight-LGPL3.txt</validHeader>
+            </validHeaders>
+            <strictCheck>true</strictCheck>
+            <mapping>
+              <java>SLASHSTAR_STYLE</java>
+            </mapping>
+            <properties>
+              <project>
+                ${license.project}
+              </project>
+              <period>${license.period}</period>
+              <owner>${license.owner}</owner>
+              <url>${license.url}</url>
+              <email>${license.email}</email>
+            </properties>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <useDefaultMapping>false</useDefaultMapping>
+            <excludes>
+              <exclude>src/test/resources/**</exclude>
+              <exclude>src/main/resources/**</exclude>
+            </excludes>
+            <failIfMissing>true</failIfMissing>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+                <goal>format</goal>
+                <goal>remove</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>

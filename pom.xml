@@ -5,7 +5,7 @@
   <version>2.0.0-SNAPSHOT</version>
   <name>qualinsight-mavencentral-parent</name>
   <description>Parent pom providing required configuration to release QualInsight OpenSource projects on Maven Central.</description>
-  <url>https://github.com/QualInsight/qualinsight-cor-superparent</url>
+  <url>https://github.com/QualInsight/qualinsight-mavencentral-parent</url>
   <organization>
     <url>http://www.qualinsight.com/</url>
     <name>QualInsight</name>
@@ -38,20 +38,20 @@
     <!-- General properties -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- Plugin versions setup -->
-    <plugin.version.maven-compiler-plugin>3.3</plugin.version.maven-compiler-plugin>
-    <plugin.version-nexus-staging-maven-plugin>1.6.3</plugin.version-nexus-staging-maven-plugin>
-    <plugin.version.maven-source-plugin>2.2.1</plugin.version.maven-source-plugin>
-    <plugin.version.maven-javadoc-plugin>2.9.1</plugin.version.maven-javadoc-plugin>
-    <plugin.version.maven-gpg-plugin>1.5</plugin.version.maven-gpg-plugin>
-    <plugin.version.maven-release-plugin>2.5</plugin.version.maven-release-plugin>
-    <plugin.version.maven-compiler-plugin>3.3</plugin.version.maven-compiler-plugin>
-    <plugin.version.maven-surefire-plugin>2.18.1</plugin.version.maven-surefire-plugin>
-    <plugin.version.maven-failsafe-plugin>2.18.1</plugin.version.maven-failsafe-plugin>
-    <plugin.version.maven-enforcer-plugin>1.4</plugin.version.maven-enforcer-plugin>
-    <plugin.version.jacoco-maven-plugin>0.7.5.201505241946</plugin.version.jacoco-maven-plugin>
-    <plugin.version.license-maven-plugin>2.11</plugin.version.license-maven-plugin>
+    <plugin.maven-compiler-plugin.version>3.3</plugin.maven-compiler-plugin.version>
+    <plugin.nexus-staging-maven-plugin.version>1.6.3</plugin.nexus-staging-maven-plugin.version>
+    <plugin.maven-source-plugin.version>2.2.1</plugin.maven-source-plugin.version>
+    <plugin.maven-javadoc-plugin.version>2.9.1</plugin.maven-javadoc-plugin.version>
+    <plugin.maven-gpg-plugin.version>1.5</plugin.maven-gpg-plugin.version>
+    <plugin.maven-release-plugin.version>2.5</plugin.maven-release-plugin.version>
+    <plugin.maven-compiler-plugin.version>3.3</plugin.maven-compiler-plugin.version>
+    <plugin.maven-surefire-plugin.version>2.18.1</plugin.maven-surefire-plugin.version>
+    <plugin.maven-failsafe-plugin.version>2.18.1</plugin.maven-failsafe-plugin.version>
+    <plugin.maven-enforcer-plugin.version>1.4</plugin.maven-enforcer-plugin.version>
+    <plugin.jacoco-maven-plugin.version>0.7.6.201602180812</plugin.jacoco-maven-plugin.version>
+    <plugin.license-maven-plugin.version>2.11</plugin.license-maven-plugin.version>
     <!-- Dependency versions setup -->
-    <lib.version.qualinsight-core-licenseheaders>1.0.0</lib.version.qualinsight-core-licenseheaders>
+    <lib.qualinsight-core-licenseheaders.version>2.0.0</lib.qualinsight-core-licenseheaders.version>
     <!-- License properties -->
     <license.name>QualInsight-LGPL3</license.name>
     <license.project>${project.name}</license.project>
@@ -66,7 +66,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>${plugin.version.maven-compiler-plugin}</version>
+          <version>${plugin.maven-compiler-plugin.version}</version>
           <configuration>
             <encoding>UTF-8</encoding>
           </configuration>
@@ -74,7 +74,7 @@
         <plugin>
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>${plugin.version-nexus-staging-maven-plugin}</version>
+          <version>${plugin.nexus-staging-maven-plugin.version}</version>
           <extensions>true</extensions>
           <configuration>
             <serverId>ossrh</serverId>
@@ -85,7 +85,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
-          <version>${plugin.version.maven-source-plugin}</version>
+          <version>${plugin.maven-source-plugin.version}</version>
           <executions>
             <execution>
               <id>attach-sources</id>
@@ -98,7 +98,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${plugin.version.maven-javadoc-plugin}</version>
+          <version>${plugin.maven-javadoc-plugin.version}</version>
           <executions>
             <execution>
               <id>attach-javadocs</id>
@@ -111,7 +111,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>${plugin.version.maven-gpg-plugin}</version>
+          <version>${plugin.maven-gpg-plugin.version}</version>
           <executions>
             <execution>
               <id>sign-artifacts</id>
@@ -125,7 +125,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>${plugin.version.maven-release-plugin}</version>
+          <version>${plugin.maven-release-plugin.version}</version>
           <configuration>
             <autoVersionSubmodules>true</autoVersionSubmodules>
             <useReleaseProfile>false</useReleaseProfile>
@@ -136,7 +136,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>${plugin.version.maven-surefire-plugin}</version>
+          <version>${plugin.maven-surefire-plugin.version}</version>
           <configuration>
             <skip>true</skip>
             <parallel>classesAndMethods</parallel>
@@ -160,7 +160,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${plugin.version.maven-failsafe-plugin}</version>
+          <version>${plugin.maven-failsafe-plugin.version}</version>
           <executions>
             <execution>
               <id>failsafe-it</id>
@@ -174,7 +174,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>${plugin.version.jacoco-maven-plugin}</version>
+          <version>${plugin.jacoco-maven-plugin.version}</version>
           <executions>
             <execution>
               <id>jacoco-prepare-agent</id>
@@ -201,12 +201,12 @@
         <plugin>
           <groupId>com.mycila</groupId>
           <artifactId>license-maven-plugin</artifactId>
-          <version>${plugin.version.license-maven-plugin}</version>
+          <version>${plugin.license-maven-plugin.version}</version>
           <dependencies>
             <dependency>
               <groupId>com.qualinsight.core</groupId>
               <artifactId>qualinsight-core-licenseheaders</artifactId>
-              <version>${lib.version.qualinsight-core-licenseheaders}</version>
+              <version>${lib.qualinsight-core-licenseheaders.version}</version>
             </dependency>
           </dependencies>
           <configuration>

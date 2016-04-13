@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.qualinsight.mavencentral</groupId>
   <artifactId>qualinsight-mavencentral-parent</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0</version>
   <name>qualinsight-mavencentral-parent</name>
   <description>Parent pom providing required configuration to release QualInsight OpenSource projects on Maven Central.</description>
   <url>https://github.com/QualInsight/qualinsight-mavencentral-parent</url>
@@ -32,7 +32,7 @@
     <connection>scm:git:git@github.com:QualInsight/qualinsight-mavencentral-parent.git</connection>
     <developerConnection>scm:git:git@github.com:QualInsight/qualinsight-mavencentral-parent.git</developerConnection>
     <url>https://github.com/QualInsight/qualinsight-mavencentral-parent.git</url>
-    <tag>HEAD</tag>
+    <tag>qualinsight-mavencentral-parent-2.0.0</tag>
   </scm>
   <properties>
     <!-- General properties -->
